@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../CentroMedico.Domain/CentroMedico.Domain.csproj" />
+    <ProjectReference Include="../CentroMedico.Application/CentroMedico.Application.csproj" />
+    <ProjectReference Include="../CentroMedico.Infrastructure/CentroMedico.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\*.png" />
+    <Resource Include="Assets\*.png" />
+  </ItemGroup>
+</Project>

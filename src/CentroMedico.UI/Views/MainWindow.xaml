@@ -1,0 +1,141 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:CentroMedico.UI.ViewModels"
+        Title="Centro Médico" Width="1120" Height="860"
+        MinWidth="960" MinHeight="680" WindowStartupLocation="CenterScreen"
+        Background="#EDF6FA" Foreground="#183246"
+        FontFamily="Segoe UI" FontSize="13">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="190"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid ClipToBounds="True">
+            
+      
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#F7043A5B" Offset="0"/>
+                        <GradientStop Color="#B8076F96" Offset="0.44"/>
+                        <GradientStop Color="#18008BB7" Offset="0.82"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <StackPanel Margin="32,20" VerticalAlignment="Center">
+                <Border Width="40" Height="40" CornerRadius="10" Background="White"
+                        HorizontalAlignment="Left" Margin="0,0,0,9">
+                    <Grid Width="24" Height="24">
+                        <Rectangle Width="24" Height="7" Fill="{StaticResource ColorPrincipal}"/>
+                        <Rectangle Width="7" Height="24" Fill="{StaticResource ColorPrincipal}"/>
+                    </Grid>
+                </Border>
+                <TextBlock Text="Centro Médico" FontSize="29" FontWeight="SemiBold" Foreground="White"/>
+                <TextBlock Text="Gestión de consultas" FontSize="14" Foreground="#E2F5FE" Margin="0,3,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1"
+        Background="White"
+        BorderBrush="{StaticResource ColorBorde}"
+        BorderThickness="0,0,0,1"
+        Padding="16,9">
+
+            <Border.Resources>
+                <Style x:Key="BotonMenuCompacto"
+               TargetType="Button"
+               BasedOn="{StaticResource BotonNavegacion}">
+                    <Setter Property="Padding" Value="12,10"/>
+                    <Setter Property="Margin" Value="0,0,6,0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                </Style>
+            </Border.Resources>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Navegación -->
+                <WrapPanel Grid.Column="0"
+                   VerticalAlignment="Center">
+
+                    <Button Content="Gestión de citas"
+                    Command="{Binding ComandoGestionCitas}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeGestionCitas,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Pacientes"
+                    Command="{Binding ComandoPacientes}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedePacientes,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Médicos"
+                    Command="{Binding ComandoMedicos}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeMedicos,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Agenda / Cierre"
+                    Command="{Binding ComandoAgenda}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeAgenda,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Historial clínico"
+                    Command="{Binding ComandoHistorial}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeHistorial,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Recetas"
+                    Command="{Binding ComandoRecetas}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeRecetas,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                    <Button Content="Facturación"
+                    Command="{Binding ComandoFacturacion}"
+                    Style="{StaticResource BotonMenuCompacto}"
+                    Visibility="{Binding puedeFacturacion,
+                    Converter={StaticResource BooleanoAVisibilidad}}"/>
+
+                </WrapPanel>
+
+                <!-- Usuario conectado -->
+                <StackPanel Grid.Column="1"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="12,0,0,0">
+
+                    <TextBlock Text="{Binding nombreUsuario}"
+                       VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       Foreground="#183246"
+                       Margin="10,0"/>
+
+                    <Border Background="#E0F3FC"
+                    CornerRadius="12"
+                    Padding="10,4">
+
+                        <TextBlock Text="{Binding rolUsuario}"
+                           Foreground="#087FAA"
+                           FontSize="11"
+                           FontWeight="SemiBold"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Background="White" Padding="20" CornerRadius="8" Margin="24,18,24,24"
+                BorderBrush="{StaticResource ColorBorde}" BorderThickness="1">
+            <ContentControl Content="{Binding vistaActual}"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,134 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+        <SolidColorBrush x:Key="ColorPrincipal" Color="#087FAA"/>
+        <SolidColorBrush x:Key="ColorBorde" Color="#D7E5ED"/>
+        <ImageBrush x:Key="FondoConsulta"
+                    ImageSource="/CentroMedico.UI;component/Assets/FondoConsulta.png"
+                    Stretch="UniformToFill" AlignmentY="Top"/>
+        <ImageBrush x:Key="FondoConsultorio"
+                    ImageSource="/CentroMedico.UI;component/Assets/FondoConsultorio.png"
+                    Stretch="UniformToFill" AlignmentY="Center"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Background" Value="#F2F8FB"/>
+            <Setter Property="Foreground" Value="#183246"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bordeBoton" CornerRadius="5"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter RecognizesAccessKey="True"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bordeBoton" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bordeBoton" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bordeBoton" Property="BorderBrush" Value="#004D70"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bordeBoton" Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BotonPrincipal" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="{StaticResource ColorPrincipal}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorPrincipal}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="18,11"/>
+        </Style>
+        <Style x:Key="BotonNavegacion" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#096789"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="18,10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0F3FC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Margin" Value="0,5,8,10"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#183246"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#183246"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="Margin" Value="0,8,0,12"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#183246"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#E1EBF1"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#F7FBFD"/>
+            <Setter Property="RowHeight" Value="36"/>
+            <Setter Property="ColumnHeaderHeight" Value="38"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#EEF6FA"/>
+            <Setter Property="Foreground" Value="#183246"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="9,7"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#DDF2FD"/>
+                    <Setter Property="Foreground" Value="#135E83"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="#EDF6FA"/>
+        <Setter Property="Foreground" Value="#183246"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,239 @@
+﻿<UserControl x:Class="CentroMedico.UI.Views.MedicosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent"
+             FontFamily="Segoe UI"
+             FontSize="14">
+
+    <UserControl.Resources>
+
+        <Style x:Key="CampoMedico"
+               TargetType="TextBox">
+            <Setter Property="Height"
+                    Value="46"/>
+            <Setter Property="Padding"
+                    Value="12,8"/>
+            <Setter Property="Background"
+                    Value="White"/>
+            <Setter Property="BorderBrush"
+                    Value="#C7DCE7"/>
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center"/>
+        </Style>
+
+        <Style x:Key="BotonMedico"
+               TargetType="Button">
+            <Setter Property="MinWidth"
+                    Value="140"/>
+            <Setter Property="Height"
+                    Value="48"/>
+            <Setter Property="Padding"
+                    Value="18,10"/>
+            <Setter Property="Margin"
+                    Value="0,0,10,0"/>
+            <Setter Property="Background"
+                    Value="#F4F9FC"/>
+            <Setter Property="Foreground"
+                    Value="#12324B"/>
+            <Setter Property="BorderBrush"
+                    Value="#C7DCE7"/>
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+
+        <StackPanel Margin="26">
+
+            <TextBlock Text="Gestión de médicos"
+                       FontSize="28"
+                       FontWeight="SemiBold"
+                       Foreground="#12324B"/>
+
+            <TextBlock Text="Registro y actualización de médicos"
+                       Margin="0,6,0,22"
+                       FontSize="15"
+                       Foreground="#5D7C91"/>
+
+            <Border Background="#F6FBFE"
+                    BorderBrush="#D3E5EE"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Padding="22">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="22"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="22"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Código"
+                               Margin="0,0,0,8"
+                               FontWeight="SemiBold"
+                               Foreground="#12324B"/>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="2"
+                               Text="Nombre completo"
+                               Margin="0,0,0,8"
+                               FontWeight="SemiBold"
+                               Foreground="#12324B"/>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="4"
+                               Text="Especialidad"
+                               Margin="0,0,0,8"
+                               FontWeight="SemiBold"
+                               Foreground="#12324B"/>
+
+                    <TextBox Grid.Row="1"
+                             Grid.Column="0"
+                             MaxLength="12"
+                             Style="{StaticResource CampoMedico}"
+                             Text="{Binding codigo,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBox Grid.Row="1"
+                             Grid.Column="2"
+                             MaxLength="100"
+                             Style="{StaticResource CampoMedico}"
+                             Text="{Binding nombre,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBox Grid.Row="1"
+                             Grid.Column="4"
+                             MaxLength="80"
+                             Style="{StaticResource CampoMedico}"
+                             Text="{Binding especialidad,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </Border>
+
+            <WrapPanel Margin="0,18,0,0">
+
+                <Button Content="Nuevo"
+                        Command="{Binding ComandoNuevo}"
+                        Style="{StaticResource BotonMedico}"/>
+
+                <Button Content="Registrar médico"
+                        Command="{Binding ComandoRegistrar}"
+                        Style="{StaticResource BotonMedico}"
+                        Background="#0B8DB5"
+                        Foreground="White"
+                        BorderBrush="#087A9D"
+                        MinWidth="175"/>
+
+                <Button Content="Actualizar médico"
+                        Command="{Binding ComandoActualizar}"
+                        Style="{StaticResource BotonMedico}"
+                        Background="#F1C878"
+                        Foreground="White"
+                        BorderBrush="#E1B45E"
+                        MinWidth="175"/>
+
+                <Button Content="Actualizar listado"
+                        Command="{Binding ComandoCargar}"
+                        Style="{StaticResource BotonMedico}"
+                        MinWidth="165"/>
+            </WrapPanel>
+
+            <Border Margin="0,18,0,0"
+                    Padding="14"
+                    Background="#EAF6FB"
+                    BorderBrush="#D3E5EE"
+                    BorderThickness="1"
+                    CornerRadius="7">
+
+                <TextBlock Text="{Binding mensaje}"
+                           Foreground="#12324B"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <TextBlock Text="Médicos registrados"
+                       Margin="0,24,0,0"
+                       FontSize="23"
+                       FontWeight="SemiBold"
+                       Foreground="#12324B"/>
+
+            <TextBlock Text="Seleccione un médico para modificar sus datos."
+                       Margin="0,5,0,14"
+                       Foreground="#5D7C91"/>
+
+            <DataGrid ItemsSource="{Binding medicos}"
+                      SelectedItem="{Binding medicoSeleccionado,
+                                             Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      BorderBrush="#D3E5EE"
+                      BorderThickness="1"
+                      RowHeight="44"
+                      ColumnHeaderHeight="46"
+                      MinHeight="250"
+                      Background="White"
+                      AlternatingRowBackground="#F7FBFD">
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="#EAF5FA"/>
+                        <Setter Property="Foreground"
+                                Value="#12324B"/>
+                        <Setter Property="FontWeight"
+                                Value="SemiBold"/>
+                        <Setter Property="Padding"
+                                Value="10,8"/>
+                        <Setter Property="BorderBrush"
+                                Value="#D3E5EE"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="ID"
+                                        Binding="{Binding Id}"
+                                        Width="70"/>
+
+                    <DataGridTextColumn Header="Código"
+                                        Binding="{Binding Codigo}"
+                                        Width="180"/>
+
+                    <DataGridTextColumn Header="Nombre completo"
+                                        Binding="{Binding Nombre}"
+                                        Width="*"/>
+
+                    <DataGridTextColumn Header="Especialidad"
+                                        Binding="{Binding Especialidad}"
+                                        Width="260"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
